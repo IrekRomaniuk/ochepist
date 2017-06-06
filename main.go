@@ -8,6 +8,7 @@ import (
 	"os"
 	"text/template"
 	"log"
+	"bytes"
 )
 
 func init() {
@@ -30,11 +31,14 @@ tpl, err := template.ParseGlob("templates/*")
 dbedit := map[string]string{"name": "", "ipaddr": "", "ipaddr_first": "", "ipaddr_last": "", "netmask": ""}
 
 scanner := bufio.NewScanner(strings.NewReader(data))
+
+var result []string
 	
 	
       for scanner.Scan() {
 				//fmt.Println(scanner.Text())
 				line:=strings.Trim(scanner.Text(),"")
+				var out bytes.Buffer
 			  	switch  {
 			  	case strings.ContainsAny(line,"-"):
 				    s:= strings.Split(line,"-")
@@ -44,11 +48,12 @@ scanner := bufio.NewScanner(strings.NewReader(data))
 						dbedit["ipaddr_first"] = s[0]
 						dbedit["ipaddr_last"] = s[1]
 						
-						err := tpl.ExecuteTemplate(os.Stdout, "ranges.gotxt", dbedit)
-						if err != nil {
+						if err := tpl.ExecuteTemplate(&out, "ranges.gotxt", dbedit); err != nil {
 						log.Fatalln(err)
 						}
 						//fmt.Println("\n",dbedit)
+						//fmt.Println(out.String())
+						result = append(result, out.String())
 					}		
 			 	case strings.ContainsAny(line,"/"):
 				 	s:= strings.Split(line,"/")
@@ -62,5 +67,7 @@ scanner := bufio.NewScanner(strings.NewReader(data))
 						
 			  }
       }
+
+	  fmt.Println(result)
 
 }
