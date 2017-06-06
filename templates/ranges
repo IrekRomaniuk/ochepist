@@ -1,0 +1,10 @@
+//This sample script creates the address range object addr-range with the IP addresses 192.0.2.150 to 190.0.2.200.
+
+//Create the actual object (of type address_range)
+create address_range addr-range
+//Modify the first IP address in the range
+modify network_objects addr-range ipaddr_first 192.0.2.150
+//Modify the last IP address in the range
+modify network_objects addr-range ipaddr_last 192.0.2.200
+//Add a comment to describe what the object is for (optional)
+modify network_objects addr-range comments "Created by fwadmin with dbedit"

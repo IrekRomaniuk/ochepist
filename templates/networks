@@ -1,0 +1,10 @@
+//Create an object for the database that represents a network. This sample script creates the network net-internal with the IP address 190.0.2.0.
+
+//Create the object (of type network)
+create network net-internal
+//Configure the network IP address
+modify network_objects net-internal ipaddr 192.0.2.0
+//Configure the netmask (in dotted decimal notation) of the network
+modify network_objects net-internal netmask 255.255.255.0
+//Add a comment to describe what the object is for (optional)
+modify network_objects net-internal comments "Created by fwadmin with dbedit"

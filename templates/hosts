@@ -1,0 +1,8 @@
+//This sample script creates the host host-10 with the IP address 192.0.2.10.
+
+//Create the actual object (of type host_plain)
+create host_plain host-10
+//Modify the host IP address
+modify network_objects host-10 ipaddr 192.0.2.10
+//Add a comment to describe what the object is for (optional)
+modify network_objects host-10 comments "Created by fwadmin with dbedit"
