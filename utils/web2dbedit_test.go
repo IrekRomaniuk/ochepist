@@ -8,8 +8,7 @@ import (
 
 //func Ip2dbedit(data *string, group string) bytes.Buffer {
 func TestIp2dbedit(t *testing.T) {
-	//output := Ip2dbedit([]byte(data), "g-ochepist-test")
-	output := Ip2dbedit(&data, "g-ochepist-test")
+	output := Ip2dbedit(data, "g-ochepist-test","added by ochecpist with dbedit - test", "../templates/*")
 	fmt.Println(output.String())
 }
 

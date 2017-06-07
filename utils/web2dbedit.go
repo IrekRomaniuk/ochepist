@@ -9,13 +9,13 @@ import (
 )
 
 //Write data with IP addresses in dbedit format
-func Ip2dbedit(data *string, group string) bytes.Buffer {
-	tpl, err := template.ParseGlob("templates/*")
+func Ip2dbedit(data, group, comment, templates string) bytes.Buffer {
+	tpl, err := template.ParseGlob(templates)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	scanner := bufio.NewScanner(strings.NewReader(*data))
-	dbedit := map[string]string{"name": "", "ipaddr": "", "ipaddr_first": "", "ipaddr_last": "", "netmask": "", "group": group, "comment": ""}
+	scanner := bufio.NewScanner(strings.NewReader(data))
+	dbedit := map[string]string{"name": "", "ipaddr": "", "ipaddr_first": "", "ipaddr_last": "", "netmask": "", "group": group, "comment": comment} 
 	var result bytes.Buffer
 	result.WriteString("create network_object_group g-net_group " + group + "\n")
 	for scanner.Scan() {
