@@ -1,16 +1,19 @@
-create network_object_group g-net_group g-ochepist-test
+create network_object_group g-ochepist-test
 create address_range r1.1.1.1-1.1.1.254
 modify network_objects r1.1.1.1-1.1.1.254 ipaddr_first 1.1.1.1
 modify network_objects r1.1.1.1-1.1.1.254 ipaddr_last 1.1.1.254
 modify network_objects r1.1.1.1-1.1.1.254 comments "added by ochepist with dbedit - test"
+update network_objects r1.1.1.1-1.1.1.254
 addelement network_objects g-ochepist-test '' network_objects:r1.1.1.1-1.1.1.254  
 update network_objects g-ochepist-testcreate network n2.2.2.0-255.255.255.0
 modify network_objects n2.2.2.0-255.255.255.0 ipaddr 2.2.2.0
 modify network_objects n2.2.2.0-255.255.255.0 netmask 255.255.255.0
 modify network_objects n2.2.2.0-255.255.255.0 comments "added by ochepist with dbedit - test"
+update network_objects n2.2.2.0-255.255.255.0
 addelement network_objects g-ochepist-test '' network_objects:n2.2.2.0-255.255.255.0 
 update network_objects g-ochepist-testcreate host_plain h3.3.3.3
 modify network_objects h3.3.3.3 ipaddr 3.3.3.3
 modify network_objects h3.3.3.3 comments "added by ochepist with dbedit - test"
+update network_objects h3.3.3.3
 addelement network_objects g-ochepist-test '' network_objects:h3.3.3.3 
 update network_objects g-ochepist-test

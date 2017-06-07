@@ -17,7 +17,7 @@ func Ip2dbedit(data, group, comment, templates string) bytes.Buffer {
 	scanner := bufio.NewScanner(strings.NewReader(data))
 	dbedit := map[string]string{"name": "", "ipaddr": "", "ipaddr_first": "", "ipaddr_last": "", "netmask": "", "group": group, "comment": comment} 
 	var result bytes.Buffer
-	result.WriteString("create network_object_group g-net_group " + group + "\n")
+	result.WriteString("create network_object_group " + group + "\n")
 	for scanner.Scan() {
 				line:=strings.Trim(scanner.Text(),"")
 				var out bytes.Buffer
@@ -25,7 +25,7 @@ func Ip2dbedit(data, group, comment, templates string) bytes.Buffer {
 			  	case strings.ContainsAny(line,"-"):
 				    s:= strings.Split(line,"-")
 					if ValidIP4(s[0]) && ValidIP4(s[1]) {
-						dbedit["name"] = "r" + line
+						dbedit["name"] = "r" + s[0] + "-" + s[1]
 						dbedit["ipaddr_first"] = s[0]
 						dbedit["ipaddr_last"] = s[1]
 						
@@ -48,8 +48,8 @@ func Ip2dbedit(data, group, comment, templates string) bytes.Buffer {
 					}		
 				default: 
 					s := strings.Split(line,"\n")
-					if ValidIP4(line) {
-						dbedit["name"] = "h" + line
+					if ValidIP4(s[0]) {
+						dbedit["name"] = "h" + s[0]
 						dbedit["ipaddr"] = s[0]
 						
 						if err = tpl.ExecuteTemplate(&out, "hosts.gotxt", dbedit); err != nil {

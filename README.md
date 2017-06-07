@@ -1,0 +1,1 @@
+dbedit -local -globallock -f /some_path_to_file/g-ochepist-test-dbedit.txt
