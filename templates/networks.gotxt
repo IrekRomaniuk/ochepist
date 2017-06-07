@@ -1,4 +1,6 @@
 create network {{.name}}
 modify network_objects {{.name}} ipaddr {{.ipaddr}}
 modify network_objects {{.name}} netmask {{.netmask}}
-modify network_objects {{.name}} comments {{.comment}}
+modify network_objects {{.name}} comments "{{.comment}}"
+addelement network_objects {{.group}} '' network_objects:{{.name}} 
+update network_objects {{.group}}

@@ -47,9 +47,9 @@ func Ip2dbedit(data, group, comment, templates string) bytes.Buffer {
 						result.WriteString(out.String())
 					}		
 				default: 
-					s := strings.Split(line,"")
+					s := strings.Split(line,"\n")
 					if ValidIP4(line) {
-						dbedit["name"] = "r" + line
+						dbedit["name"] = "h" + line
 						dbedit["ipaddr"] = s[0]
 						
 						if err = tpl.ExecuteTemplate(&out, "hosts.gotxt", dbedit); err != nil {

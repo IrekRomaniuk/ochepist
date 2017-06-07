@@ -13,8 +13,12 @@ var (
 	URL       = flag.String("url", "https://minemeld/feeds/office365_IPv4s", "URL to pull IP addresses from")
 	//GROUP is object group where IP list is included
 	GROUP     = flag.String("g", "g-ochepist-temp", "Object group to include retrieved IP addresses")
-	//PATH to dbedit
-	PATH     = flag.String("p", "./results/", "path to dbedit file")
+	//PATH to dbedit result
+	PATH_RESULT    = flag.String("p", "./results/", "path to created dbedit file")
+	//TEMPLATES to dbedit templates
+	TEMPLATES    = flag.String("t", "templates/*", "path to dbedit tempalte files")
+	//COMMENT added to created objects
+	COMMENT     = flag.String("c", "Created by ochepist with dbedit", "comment added to objects")
 	version   = flag.Bool("v", false, "Prints current version")
 )
 var (
@@ -45,9 +49,9 @@ if err != nil {
 	log.Fatalln(err)
 }
 	
-output := utils.Ip2dbedit(&data, *GROUP)
+output := utils.Ip2dbedit(data, *GROUP, *COMMENT, *TEMPLATES)
 
-f, err := os.Create(*PATH + *GROUP + "-dbedit.txt")
+f, err := os.Create(*PATH_RESULT + *GROUP + "-dbedit.txt")
 check(err)
 defer f.Close()
 b, err := f.Write(output.Bytes())
