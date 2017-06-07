@@ -43,6 +43,11 @@ modify network_objects r104.41.155.129-104.41.155.129 ipaddr_first 104.41.155.12
 
 [Expert@provider1:0]# dbedit -local -globallock -f results/g-o365-dbedit.txt
 ```
+### ToDo
+
++ deleting objects before creating or updating
++ missing end of lines in g-ochecpist-test-dbedit.txt
++ return hash of url body and keep in env variable in order to skip if not changes
 
 ### References
 
@@ -50,3 +55,4 @@ modify network_objects r104.41.155.129-104.41.155.129 ipaddr_first 104.41.155.12
 2. https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk30383
 3. http://networkgeekstuff.com/networking/introduction-to-checkpoint-firewall-cli-tool-dbedit-and-quick-lab-examples/
 4. https://medium.com/@IrekRomaniuk/creating-a-source-for-external-dynamic-list-on-paloalto-firewall-578363f307a8
+5. https://www.cpug.org/forums/showthread.php/22008-Split-Tunneling-based-on-Application-Control?p=96108#post96108
