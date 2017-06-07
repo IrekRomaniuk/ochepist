@@ -4,7 +4,7 @@
 ### Arguments
 
  ./ochepist_linux_386 -h
-
+```
 Copyright 2017 @IrekRomaniuk. All rights reversed.
 
 Usage of ./ochepist_linux_386:
@@ -30,9 +30,11 @@ Usage of ./ochepist_linux_386:
         URL to pull IP addresses from (default "https://minemeld/feeds/office365_IPv4s")
 
   -v    Prints current version
+```
 
 ### Example
 
+```
 [Expert@provider1:0]# ./ochepist_linux_386 -url="https://minemeld/feeds/office365_IPv4s" -g="g-o365"
 
 wrote 357258 bytes
@@ -60,3 +62,4 @@ create address_range r104.41.155.129-104.41.155.129
 modify network_objects r104.41.155.129-104.41.155.129 ipaddr_first 104.41.155.129
 
 [Expert@provider1:0]# dbedit -local -globallock -f results/g-o365-dbedit.txt
+```
