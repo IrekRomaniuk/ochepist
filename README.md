@@ -12,19 +12,14 @@ Usage of ./ochepist_linux_386:
 
   -c string
         comment added to objects (default "Created by ochepist with dbedit")
-
   -g string
         Object group to include retrieved IP addresses (default "g-ochepist-temp")
-
   -p string
         path to created dbedit file (default "./results/")
-
   -t string
         path to dbedit tempalte files (default "templates/*")
-
   -url string
         URL to pull IP addresses from (default "https://minemeld/feeds/office365_IPv4s")
-
   -v    Prints current version
 ```
 
