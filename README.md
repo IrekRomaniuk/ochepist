@@ -43,3 +43,10 @@ modify network_objects r104.41.155.129-104.41.155.129 ipaddr_first 104.41.155.12
 
 [Expert@provider1:0]# dbedit -local -globallock -f results/g-o365-dbedit.txt
 ```
+
+### References
+
+1. https://sc1.checkpoint.com/documents/R77/CP_R77_CLI_ReferenceGuide_WebAdmin/html_frameset.htm?topic=documents/R77/CP_R77_CLI_ReferenceGuide_WebAdmin/105997
+2. https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk30383
+3. http://networkgeekstuff.com/networking/introduction-to-checkpoint-firewall-cli-tool-dbedit-and-quick-lab-examples/
+4. https://medium.com/@IrekRomaniuk/creating-a-source-for-external-dynamic-list-on-paloalto-firewall-578363f307a8
