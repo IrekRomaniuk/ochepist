@@ -45,7 +45,8 @@ modify network_objects r104.41.155.129-104.41.155.129 ipaddr_first 104.41.155.12
 ```
 ### ToDo
 
-+ dbedit validation error: deleting objects before creating or updating ? 
++ dbedit validation error: deleting objects before creating or updating ? The referenced object ... from table 'network_objects' does not exist in the database
+Object contain invalid reference
 + missing end of lines in g-ochecpist-test-dbedit.txt (including differences between Win and Linux)
 + return hash of url body and keep in env variable in order to skip if not changes
 + 
