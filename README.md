@@ -1,7 +1,7 @@
 
-###Under Development###
+### Under Development 
 
-####Arguments####
+#### Arguments
 
  ./ochepist_linux_386 -h
 
@@ -31,7 +31,7 @@ Usage of ./ochepist_linux_386:
 
   -v    Prints current version
 
-####Example####
+#### Example
 
 [Expert@provider1:0]# ./ochepist_linux_386 -url="https://minemeld/feeds/office365_IPv4s" -g="g-o365"
 
