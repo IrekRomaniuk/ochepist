@@ -3,71 +3,62 @@ package main
 import (
 	"github.com/IrekRomaniuk/ochepist/utils"
 	"fmt"
-	"bufio"
-	"strings"
 	"os"
-	"text/template"
 	"log"
-	"bytes"
+	"flag"
+)
+
+var (
+	//URL to IP list
+	URL       = flag.String("url", "https://minemeld/feeds/office365_IPv4s", "URL to pull IP addresses from")
+	//GROUP is object group where IP list is included
+	GROUP     = flag.String("g", "g-ochepist-temp", "Object group to include retrieved IP addresses")
+	//PATH to dbedit
+	PATH     = flag.String("p", "./results/", "path to dbedit file")
+	version   = flag.Bool("v", false, "Prints current version")
+)
+var (
+	// Version : Program version
+	Version   = "No Version Provided" 
+	// BuildTime : Program build time
+	BuildTime = ""
 )
 
 func init() {
-	
+	flag.Usage = func() {
+		fmt.Printf("Copyright 2017 @IrekRomaniuk. All rights resgit brerved.\n")
+		fmt.Printf("Usage of %s:\n", os.Args[0])
+		flag.PrintDefaults()
+	}
+	flag.Parse()
+	if *version {
+		fmt.Printf("App Version: %s\nBuild Time : %s\n", Version, BuildTime)
+		os.Exit(0)
+	}	
 }
 
 
 func main() {
 
-data, err:= utils.GetPage("https://minemeld/feeds/office365_IPv4s")
+data, err:= utils.GetPage(*URL)
 if err != nil {
-	os.Exit(1)
+	log.Fatalln(err)
+}
+	
+output := utils.Ip2dbedit(&data, *GROUP)
+
+f, err := os.Create(*PATH + *GROUP + "-dbedit.txt")
+check(err)
+defer f.Close()
+b, err := f.Write(output.Bytes())
+check(err)
+fmt.Printf("wrote %d bytes\n", b)
 }
 
-tpl, err := template.ParseGlob("templates/*")
-	if err != nil {
-		log.Fatalln(err)
-	}
 
-dbedit := map[string]string{"name": "", "ipaddr": "", "ipaddr_first": "", "ipaddr_last": "", "netmask": ""}
 
-scanner := bufio.NewScanner(strings.NewReader(data))
-
-var result []string
-	
-	
-      for scanner.Scan() {
-				//fmt.Println(scanner.Text())
-				line:=strings.Trim(scanner.Text(),"")
-				var out bytes.Buffer
-			  	switch  {
-			  	case strings.ContainsAny(line,"-"):
-				    s:= strings.Split(line,"-")
-					if utils.ValidIP4(s[0]) && utils.ValidIP4(s[1]) {
-						//fmt.Println("r" + line, s[0], s[1])
-						dbedit["name"] = "r" + line
-						dbedit["ipaddr_first"] = s[0]
-						dbedit["ipaddr_last"] = s[1]
-						
-						if err := tpl.ExecuteTemplate(&out, "ranges.gotxt", dbedit); err != nil {
-						log.Fatalln(err)
-						}
-						//fmt.Println("\n",dbedit)
-						//fmt.Println(out.String())
-						result = append(result, out.String())
-					}		
-			 	case strings.ContainsAny(line,"/"):
-				 	s:= strings.Split(line,"/")
-					if utils.ValidIP4(s[0]) && utils.ValidIP4(s[1]) {
-						fmt.Println("n" + s[0] + "-" + s[1], s[0], s[1])
-					}		
-				default: 
-					if utils.ValidIP4(line) {
-						fmt.Println("h" + line)
-					}
-						
-			  }
-      }
-
-	  fmt.Println(result)
-
+func check(e error) {
+    if e != nil {
+        panic(e)
+    }
 }
