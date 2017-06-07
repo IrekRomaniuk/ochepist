@@ -5,7 +5,7 @@
 
  ./ochepist_linux_386 -h
 
-Copyright 2017 @IrekRomaniuk. All rights resgit brerved.
+Copyright 2017 @IrekRomaniuk. All rights reversed.
 
 Usage of ./ochepist_linux_386:
 
