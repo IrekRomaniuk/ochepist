@@ -48,13 +48,11 @@ func IP2dbedit(data, group, comment, templates string) bytes.Buffer {
 //Write ip addresses object in dbedit format using template with prefix and separator
 func write2dbedit(template, prefix, separator string, ip ...string) { 
 	var out bytes.Buffer
-	var ip2nd string												
 	
+	ip2nd := ""												
 	if len(ip) > 1 { 
 		ip2nd = ip[1] 
-	} else {
-			ip2nd = ""
-	}							
+	} 							
 	dbedit["name"] = strings.Trim(prefix + ip[0] + separator + ip2nd, "")
 	dbedit["ipaddr_first"] , dbedit["ipaddr"] = ip[0], ip[0]
 	dbedit["ipaddr_last"] , dbedit["netmask"] = ip2nd, ip2nd											
