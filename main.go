@@ -45,11 +45,9 @@ func init() {
 func main() {
 
 data, err:= utils.GetPage(*URL)
-if err != nil {
-	log.Fatalln(err)
-}
+check(err)
 	
-output := utils.Ip2dbedit(data, *GROUP, *COMMENT, *TEMPLATES)
+output := utils.IP2dbedit(data, *GROUP, *COMMENT, *TEMPLATES)
 
 f, err := os.Create(*PATH_RESULT + *GROUP + "-dbedit.txt")
 check(err)
@@ -63,6 +61,6 @@ fmt.Printf("wrote %d bytes\n", b)
 
 func check(e error) {
     if e != nil {
-        panic(e)
+        log.Fatalln(e)
     }
 }

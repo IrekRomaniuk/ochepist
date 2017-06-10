@@ -12,13 +12,12 @@ var tpl *template.Template
 var dbedit map[string]string
 var result bytes.Buffer
 
-//Write data with IP addresses in dbedit format
-func Ip2dbedit(data, group, comment, templates string) bytes.Buffer {
+//Convert data with IP addresses into dbedit group with comment using templates
+func IP2dbedit(data, group, comment, templates string) bytes.Buffer {
 	var err error
+	
 	tpl, err = template.ParseGlob(templates)
-	if err != nil {
-		log.Fatalln(err)
-	}
+	check(err)
 	scanner := bufio.NewScanner(strings.NewReader(data))
 	dbedit = map[string]string{"name": "", "ipaddr": "", "ipaddr_first": "", "ipaddr_last": "", 
 		"netmask": "", "group": group, "comment": comment} 
@@ -46,6 +45,7 @@ func Ip2dbedit(data, group, comment, templates string) bytes.Buffer {
 	  return result
 }
 
+//Write ip addresses object in dbedit format using template with prefix and separator
 func write2dbedit(template, prefix, separator string, ip ...string) { 
 	var out bytes.Buffer
 	var ip2nd string												
@@ -67,6 +67,6 @@ func write2dbedit(template, prefix, separator string, ip ...string) {
 
 func check(e error) {
     if e != nil {
-        panic(e)
+        log.Fatalln(e)
     }
 }

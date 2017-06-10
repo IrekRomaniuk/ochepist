@@ -8,8 +8,8 @@ import (
 
 
 //Testing 
-func TestIp2dbedit(t *testing.T) {
-	output := Ip2dbedit(data, "g-ochepist-test", "added by ochepist with dbedit - test", "../templates/*")
+func TestIP2dbedit(t *testing.T) {
+	output := IP2dbedit(data, "g-ochepist-test", "added by ochepist with dbedit - test", "../templates/*")
 	fmt.Println(output.String())
 	f, _ := os.Create("../results/" + "g-ochepist-test" + "-dbedit.txt")
 	defer f.Close()
