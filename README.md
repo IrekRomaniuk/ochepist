@@ -51,7 +51,8 @@ savedb
 + remove empty lines and spaces from end of lines
 + missing end of lines in g-ochecpist-test-dbedit.txt (including differences between Win and Linux)
 + return hash of url body and keep in env variable in order to skip if not changes
-+ 
++ add #comments in template files i.e. do not add spaces or empty lines
+
 
 ### References
 
