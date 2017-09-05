@@ -41,12 +41,11 @@ update network_objects g-o365
 create address_range r104.41.155.129-104.41.155.129
 modify network_objects r104.41.155.129-104.41.155.129 ipaddr_first 104.41.155.129
 
-[Expert@provider1:0]# dbedit -local -globallock -f results/g-o365-dbedit.txt
+[Expert@provider1:0]# dbedit -local -ignore_script_failure -globallock -f results/g-o365-dbedit.txt
 ```
 ### ToDo
 
-+ dbedit validation error: deleting objects before creating or updating ? The referenced object ... from table 'network_objects' does not exist in the database
-Object contain invalid reference
++ remove empty lines and spaces from end of lines
 + missing end of lines in g-ochecpist-test-dbedit.txt (including differences between Win and Linux)
 + return hash of url body and keep in env variable in order to skip if not changes
 + 

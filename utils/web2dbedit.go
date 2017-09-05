@@ -12,7 +12,7 @@ var tpl *template.Template
 var dbedit map[string]string
 var result bytes.Buffer
 
-//Convert data with IP addresses into dbedit group with comment using templates
+//IP2dbedit converts data with IP addresses into dbedit group with comment using templates
 func IP2dbedit(data, group, comment, templates string) bytes.Buffer {
 	var err error
 	
@@ -21,6 +21,7 @@ func IP2dbedit(data, group, comment, templates string) bytes.Buffer {
 	scanner := bufio.NewScanner(strings.NewReader(data))
 	dbedit = map[string]string{"name": "", "ipaddr": "", "ipaddr_first": "", "ipaddr_last": "", 
 		"netmask": "", "group": group, "comment": comment} 
+	result.WriteString("delete network_objects " + group + "\n")
 	result.WriteString("create network_object_group " + group + "\n")
 	for scanner.Scan() {
 				line:=strings.Trim(scanner.Text(),"")				
@@ -32,7 +33,7 @@ func IP2dbedit(data, group, comment, templates string) bytes.Buffer {
 					}					
 			 	case strings.ContainsAny(line,"/"):
 				 	s:= strings.Split(line,"/")
-					if ValidIP4(s[0]) && ValidIP4(s[1]) {
+					if ValidIP4(s[0]) && ValidIP4(s[1]) {  // s[1] to be checked for mask
 						write2dbedit("networks.gotxt", "n", "-", s[0],s[1])
 					}											
 				default: 
@@ -41,7 +42,8 @@ func IP2dbedit(data, group, comment, templates string) bytes.Buffer {
 						write2dbedit("hosts.gotxt", "h", "", s[0])
 					}											
 			  }
-      }
+	  }
+	  result.WriteString("update_all\nsavedb")
 	  return result
 }
 
@@ -60,7 +62,7 @@ func write2dbedit(template, prefix, separator string, ip ...string) {
 	if err := tpl.ExecuteTemplate(&out, template, dbedit); err != nil {
 		log.Fatalln(err)
 	}
-	result.WriteString(out.String())		
+	result.WriteString(out.String() + "\n")		
 }
 
 func check(e error) {

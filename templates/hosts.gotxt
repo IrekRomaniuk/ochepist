@@ -1,6 +1,7 @@
+delete network_objects {{.name}}
 create host_plain {{.name}}
 modify network_objects {{.name}} ipaddr {{.ipaddr}}
 modify network_objects {{.name}} comments "{{.comment}}"
 update network_objects {{.name}}
-addelement network_objects {{.group}} '' network_objects:{{.name}} 
+addelement network_objects {{.group}} '' network_objects:{{.name}}
 update network_objects {{.group}}

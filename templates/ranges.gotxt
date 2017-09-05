@@ -1,7 +1,8 @@
+delete network_objects {{.name}}
 create address_range {{.name}}
 modify network_objects {{.name}} ipaddr_first {{.ipaddr_first}}
 modify network_objects {{.name}} ipaddr_last {{.ipaddr_last}}
 modify network_objects {{.name}} comments "{{.comment}}"
 update network_objects {{.name}}
-addelement network_objects {{.group}} '' network_objects:{{.name}}  
+addelement network_objects {{.group}} '' network_objects:{{.name}}
 update network_objects {{.group}}

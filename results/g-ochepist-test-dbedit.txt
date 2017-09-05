@@ -1,19 +1,58 @@
+delete network_objects g-ochepist-test
 create network_object_group g-ochepist-test
+delete network_objects r1.1.1.1-1.1.1.254
 create address_range r1.1.1.1-1.1.1.254
 modify network_objects r1.1.1.1-1.1.1.254 ipaddr_first 1.1.1.1
 modify network_objects r1.1.1.1-1.1.1.254 ipaddr_last 1.1.1.254
 modify network_objects r1.1.1.1-1.1.1.254 comments "added by ochepist with dbedit - test"
 update network_objects r1.1.1.1-1.1.1.254
-addelement network_objects g-ochepist-test '' network_objects:r1.1.1.1-1.1.1.254  
-update network_objects g-ochepist-testcreate network n2.2.2.0-255.255.255.0
+addelement network_objects g-ochepist-test '' network_objects:r1.1.1.1-1.1.1.254
+update network_objects g-ochepist-test
+delete network_objects n2.2.2.0-255.255.255.0
+create network n2.2.2.0-255.255.255.0
 modify network_objects n2.2.2.0-255.255.255.0 ipaddr 2.2.2.0
 modify network_objects n2.2.2.0-255.255.255.0 netmask 255.255.255.0
 modify network_objects n2.2.2.0-255.255.255.0 comments "added by ochepist with dbedit - test"
 update network_objects n2.2.2.0-255.255.255.0
-addelement network_objects g-ochepist-test '' network_objects:n2.2.2.0-255.255.255.0 
-update network_objects g-ochepist-testcreate host_plain h3.3.3.3
+addelement network_objects g-ochepist-test '' network_objects:n2.2.2.0-255.255.255.0
+update network_objects g-ochepist-test
+delete network_objects h3.3.3.3
+create host_plain h3.3.3.3
 modify network_objects h3.3.3.3 ipaddr 3.3.3.3
 modify network_objects h3.3.3.3 comments "added by ochepist with dbedit - test"
 update network_objects h3.3.3.3
-addelement network_objects g-ochepist-test '' network_objects:h3.3.3.3 
+addelement network_objects g-ochepist-test '' network_objects:h3.3.3.3
 update network_objects g-ochepist-test
+delete network_objects r4.4.4.1-4.4.4.254
+create address_range r4.4.4.1-4.4.4.254
+modify network_objects r4.4.4.1-4.4.4.254 ipaddr_first 4.4.4.1
+modify network_objects r4.4.4.1-4.4.4.254 ipaddr_last 4.4.4.254
+modify network_objects r4.4.4.1-4.4.4.254 comments "added by ochepist with dbedit - test"
+update network_objects r4.4.4.1-4.4.4.254
+addelement network_objects g-ochepist-test '' network_objects:r4.4.4.1-4.4.4.254
+update network_objects g-ochepist-test
+delete network_objects n5.5.5.0-255.255.255.0
+create network n5.5.5.0-255.255.255.0
+modify network_objects n5.5.5.0-255.255.255.0 ipaddr 5.5.5.0
+modify network_objects n5.5.5.0-255.255.255.0 netmask 255.255.255.0
+modify network_objects n5.5.5.0-255.255.255.0 comments "added by ochepist with dbedit - test"
+update network_objects n5.5.5.0-255.255.255.0
+addelement network_objects g-ochepist-test '' network_objects:n5.5.5.0-255.255.255.0
+update network_objects g-ochepist-test
+delete network_objects h6.6.6.6
+create host_plain h6.6.6.6
+modify network_objects h6.6.6.6 ipaddr 6.6.6.6
+modify network_objects h6.6.6.6 comments "added by ochepist with dbedit - test"
+update network_objects h6.6.6.6
+addelement network_objects g-ochepist-test '' network_objects:h6.6.6.6
+update network_objects g-ochepist-test
+delete network_objects r7.7.7.1-7.7.7.254
+create address_range r7.7.7.1-7.7.7.254
+modify network_objects r7.7.7.1-7.7.7.254 ipaddr_first 7.7.7.1
+modify network_objects r7.7.7.1-7.7.7.254 ipaddr_last 7.7.7.254
+modify network_objects r7.7.7.1-7.7.7.254 comments "added by ochepist with dbedit - test"
+update network_objects r7.7.7.1-7.7.7.254
+addelement network_objects g-ochepist-test '' network_objects:r7.7.7.1-7.7.7.254
+update network_objects g-ochepist-test
+update_all
+savedb
