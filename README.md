@@ -52,6 +52,8 @@ savedb
 + missing end of lines in g-ochecpist-test-dbedit.txt (including differences between Win and Linux)
 + return hash of url body and keep in env variable in order to skip if not changes
 + add #comments in template files i.e. do not add spaces or empty lines
++ review https://www.cpug.org/forums/showthread.php/21002-How-to-handle-Office365-IP-addresses
++ comply with https://support.content.office.net/en-us/static/O365IPAddresses.xml not only minemeld
 
 
 ### References
@@ -61,3 +63,4 @@ savedb
 3. http://networkgeekstuff.com/networking/introduction-to-checkpoint-firewall-cli-tool-dbedit-and-quick-lab-examples/
 4. https://medium.com/@IrekRomaniuk/creating-a-source-for-external-dynamic-list-on-paloalto-firewall-578363f307a8
 5. https://www.cpug.org/forums/showthread.php/22008-Split-Tunneling-based-on-Application-Control?p=96108#post96108
+6. https://www.cpug.org/forums/showthread.php/21002-How-to-handle-Office365-IP-addresses

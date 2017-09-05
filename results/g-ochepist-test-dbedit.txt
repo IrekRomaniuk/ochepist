@@ -54,5 +54,13 @@ modify network_objects r7.7.7.1-7.7.7.254 comments "added by ochepist with dbedi
 update network_objects r7.7.7.1-7.7.7.254
 addelement network_objects g-ochepist-test '' network_objects:r7.7.7.1-7.7.7.254
 update network_objects g-ochepist-test
+delete network_objects r40.113.11.93-40.113.11.93
+create address_range r40.113.11.93-40.113.11.93
+modify network_objects r40.113.11.93-40.113.11.93 ipaddr_first 40.113.11.93
+modify network_objects r40.113.11.93-40.113.11.93 ipaddr_last 40.113.11.93
+modify network_objects r40.113.11.93-40.113.11.93 comments "added by ochepist with dbedit - test"
+update network_objects r40.113.11.93-40.113.11.93
+addelement network_objects g-ochepist-test '' network_objects:r40.113.11.93-40.113.11.93
+update network_objects g-ochepist-test
 update_all
 savedb
