@@ -23,6 +23,33 @@ Usage of ./ochepist_linux_386:
   -v    Prints current version
 ```
 
+### Deploy on Linux
+
+$ mkdir -p ochepist                
+$ cd ochepist
+$ tar zxvf ochepist.tar.gz         
+bin/
+bin/ochepist_lin
+bin/ochepist_win
+templates/
+templates/hosts.gotxt
+templates/networks.gotxt
+templates/ranges.gotxt
+results/g-ochepist-test-dbedit.txt
+$ chmod +x bin/ochepist_lin 
+$ ls -l results/g-ochepist-dbedit.txt
+$ ./ochepist.sh 
+1
+-rw-rw---- 1 admin root 423726 Sep  6 13:34 results/g-ochepist-dbedit.txt
+$ ./ochepist.sh 
+0
+$ ls -l results/g-ochepist-dbedit.txt
+-rw-rw---- 1 admin root 423726 Sep  6 13:34 results/g-ochepist-dbedit.txt
+$./ochepist
+....
+g-ochepist updated successfully.
+Database saved successfully
+161
 ### Example
 
 ```
