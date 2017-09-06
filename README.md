@@ -54,6 +54,7 @@ savedb
 + add #comments in template files i.e. do not add spaces or empty lines
 + review https://www.cpug.org/forums/showthread.php/21002-How-to-handle-Office365-IP-addresses
 + comply with https://support.content.office.net/en-us/static/O365IPAddresses.xml not only minemeld
++ Conversion from CIDR prefix notation to IP address/subnet mask (dot-decimal), see https://github.com/EvilSuperstars/go-cidrman/blob/master/ipv4.go npm netmask
 
 
 ### References
