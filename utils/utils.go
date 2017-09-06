@@ -52,7 +52,7 @@ func GetHash(file string) (string, error) {
 	return string(b), nil
 }
 
-// SetHash writes has to file
+// SetHash writes hash to file
 func SetHash(hash, file string) error {
 	err := ioutil.WriteFile(file,[]byte(hash), 0644)
 	return err
