@@ -6,15 +6,16 @@ import (
 	"os"
 	"log"
 	"flag"
+	"crypto/md5"
 )
 
 var (
 	//URL to IP list
 	URL       = flag.String("url", "https://minemeld/feeds/office365_IPv4s", "URL to pull IP addresses from")
 	//GROUP is object group where IP list is included
-	GROUP     = flag.String("g", "g-ochepist-temp", "Object group to include retrieved IP addresses")
-	//PATH to dbedit result
-	PATH_RESULT    = flag.String("p", "./results/", "path to created dbedit file")
+	GROUP     = flag.String("g", "g-ochepist", "Object group to include retrieved IP addresses")
+	//PATH to results
+	PATH    = flag.String("p", "./results/", "path to created dbedit file")
 	//TEMPLATES to dbedit templates
 	TEMPLATES    = flag.String("t", "templates/*", "path to dbedit tempalte files")
 	//COMMENT added to created objects
@@ -26,6 +27,11 @@ var (
 	Version   = "No Version Provided" 
 	// BuildTime : Program build time
 	BuildTime = ""
+)
+
+const (
+	// HASH is the name of the file where state is kept
+	HASH = "hash" 
 )
 
 func init() {
@@ -43,18 +49,39 @@ func init() {
 
 
 func main() {
+// exit value
+var hash int
+if _, err := os.Stat(*PATH + HASH); os.IsNotExist(err) {
+	h, err := os.Create(*PATH + HASH)
+	check(err)
+	defer h.Close()
+}	
 
+// download page from url
 data, err:= utils.GetPage(*URL)
 check(err)
+oldhash, _ := utils.GetHash(*PATH + HASH)
+newhash := fmt.Sprintf("%x", md5.Sum([]byte(data)))
+//fmt.Printf("old: %s new: %s\n", oldhash, newhash)
+if (oldhash != newhash) {
+	if err = utils.SetHash(newhash, *PATH + HASH); err != nil {
+			hash = 2	// //HASH has changed but not written to file
+		} else {
+			hash = 1 //HASH has chaned
+		}
+		// parses data to dbedit format	
+		output := utils.IP2dbedit(data, *GROUP, *COMMENT, *TEMPLATES)
+		f, err := os.Create(*PATH + *GROUP + "-dbedit.txt")
+		check(err)
+		defer f.Close()
+		// writes data in dbedit format to file
+		_, err = f.Write(output.Bytes())
+		check(err)
 	
-output := utils.IP2dbedit(data, *GROUP, *COMMENT, *TEMPLATES)
-
-f, err := os.Create(*PATH_RESULT + *GROUP + "-dbedit.txt")
-check(err)
-defer f.Close()
-b, err := f.Write(output.Bytes())
-check(err)
-fmt.Printf("wrote %d bytes\n", b)
+} else  {
+	hash = 0 // HASH NOT CHANGED
+}
+os.Exit(hash)
 }
 
 

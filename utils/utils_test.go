@@ -19,6 +19,10 @@ func TestGetPage(t *testing.T) {
 	fmt.Printf("\nmd5sum is %x\n", md5.Sum([]byte(data)))
 }
 
+func TestGetHash(t *testing.T) {
+	hash, _ := GetHash("../results/hash")
+	fmt.Println(hash)
+}
 
 func TestMaskDot(t *testing.T) {
 	_, ipv4Net, _ := net.ParseCIDR("10.0.0.0/8")

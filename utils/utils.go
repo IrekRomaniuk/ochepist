@@ -35,11 +35,25 @@ func ValidIP4(ip string) bool {
 	}
 	return false
 }
-
+// MaskDot converts netamsk to dot notation
 func MaskDot(m []byte) string {
 	if len(m) != 4 {
 		panic("ipv4Mask: len must be 4 bytes")
 	}
 
 	return fmt.Sprintf("%d.%d.%d.%d", m[0], m[1], m[2], m[3])
+}
+// GetHash reads hash from file
+func GetHash(file string) (string, error) {
+	b, err := ioutil.ReadFile(file) 
+    if err != nil {
+        return "", err
+	}
+	return string(b), nil
+}
+
+// SetHash writes has to file
+func SetHash(hash, file string) error {
+	err := ioutil.WriteFile(file,[]byte(hash), 0644)
+	return err
 }
