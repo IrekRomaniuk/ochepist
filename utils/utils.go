@@ -9,30 +9,36 @@ import (
 	"fmt"
 	"encoding/xml"
 )
-
-type Products struct {
-	XMLName xml.Name `xml:"products"`
-	Product []Products `xml:"product"`
+// Azure includes all Products
+type Azure struct {
+	//XMLName xml.Name `xml:"products"`
+	Products []Product `xml:"product"`
 }
-
+// Product i.e. o365
 type Product struct {
-	XMLName xml.Name `xml:"product"`
+	//XMLName xml.Name `xml:"product"`
 	Name string `xml:"name,attr"`
 	List []List `xml:"addresslist"`
 }
-
+// List i.e. IPv4
 type List struct {
-	XMLName xml.Name `xml:"addresslist"`
+	//XMLName xml.Name `xml:"addresslist"`
 	Type string `xml:"type,attr"`
+	Address []string `xml:"address"`
+	//Address
 }
 
+/*type Address struct {
+	address string
+}*/
+
 // ReadXML unmarshals xml
-func ReadXML(htmlData string) (Product, error) {
-    var products Products
+func ReadXML(htmlData string) ([]Product, error) {
+    var products Azure
     if err := xml.Unmarshal([]byte(htmlData), &products); err != nil {
-        return "", err
+        return nil, err
     }
-    return products.Product, nil
+    return products.Products, nil
 }
 
 // GetPage from url and return body as string

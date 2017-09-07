@@ -13,19 +13,22 @@ source $CPDIR_PATH/tmp/.CPprofile.sh
 # Setup the MDS Environment
 #$MDSDIR/scripts/MDSprofile.sh
 
-mdsenv CMA
-/var/scripts/ochepist/bin/ochepist_lin
+CMA = "myCMA"
+GROUP = "g-ochepist"
+mdsenv $CMA
+cd /var/scripts/ochepist/
+/var/scripts/ochepist/bin/ochepist_lin -g="$GROUP"
 if [ $? -eq 0 ]; then
     echo "NOT CHANGED" 
 else
     echo "HAS CHANGED" 
     dos2unix results/*
-    dbedit -local -ignore_script_failure -globallock -f results/g-ochepist-dbedit.txt
+    dbedit -local -ignore_script_failure -globallock -f "results/$GROUP"-dbedit.txt
 fi
 echo $?
 exit
 echo "?!"
-if [ -f /opt/CPmds-R77/customers/CMA/CPsuite-R77/fw1/tmp/manage.lock ] 
+if [ -f /opt/CPmds-R77/customers/$CMA/CPsuite-R77/fw1/tmp/manage.lock ] 
         then 
                 /opt/CPmds-R77/bin/disconnect_client 
         fi
