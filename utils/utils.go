@@ -7,8 +7,35 @@ import (
 	"regexp"
 	"strings"
 	"fmt"
+	"encoding/xml"
 )
-//Get Page from url and return body as string
+
+type Products struct {
+	XMLName xml.Name `xml:"products"`
+	Product []Products `xml:"product"`
+}
+
+type Product struct {
+	XMLName xml.Name `xml:"product"`
+	Name string `xml:"name,attr"`
+	List []List `xml:"addresslist"`
+}
+
+type List struct {
+	XMLName xml.Name `xml:"addresslist"`
+	Type string `xml:"type,attr"`
+}
+
+// ReadXML unmarshals xml
+func ReadXML(htmlData string) (Product, error) {
+    var products Products
+    if err := xml.Unmarshal([]byte(htmlData), &products); err != nil {
+        return "", err
+    }
+    return products.Product, nil
+}
+
+// GetPage from url and return body as string
 func GetPage(url string) (string, error) {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
@@ -25,7 +52,7 @@ func GetPage(url string) (string, error) {
 	resp.Body.Close()
 	return string(htmlData), nil
 }
-
+// ValidIP4 checks IP address for validity
 func ValidIP4(ip string) bool {
 	ip = strings.Trim(ip, " ")
 

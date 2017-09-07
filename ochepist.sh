@@ -19,7 +19,7 @@ if [ $? -eq 0 ]; then
     echo "NOT CHANGED" 
 else
     echo "HAS CHANGED" 
-    dos2unix results/g-ochepist-dbedit.txt
+    dos2unix results/*
     dbedit -local -ignore_script_failure -globallock -f results/g-ochepist-dbedit.txt
 fi
 echo $?

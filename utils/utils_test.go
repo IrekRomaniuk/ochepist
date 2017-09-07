@@ -17,6 +17,8 @@ func TestGetPage(t *testing.T) {
 	fmt.Println(data)
 	// Hash received data in order to find if web page content has changed
 	fmt.Printf("\nmd5sum is %x\n", md5.Sum([]byte(data)))
+	data, _ = GetPage("https://support.content.office.net/en-us/static/O365IPAddresses.xml")
+	fmt.Println(data)
 }
 
 func TestGetHash(t *testing.T) {
