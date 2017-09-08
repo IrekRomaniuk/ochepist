@@ -39,7 +39,23 @@ templates/ranges.gotxt
 results/g-ochepist-test-dbedit.txt
 
 $ chmod +x bin/ochepist_lin 
-$./ochepist_lin
+$ bin/ochepist_lin -url="O365IPAddresses.xml" -g="g-o365"
+
+$ head results/g-o365-dbedit.txt 
+delete network_objects g-o365
+create network_object_group g-o365
+delete network_objects n13.64.196.27-255.255.255.255
+create network n13.64.196.27-255.255.255.255
+modify network_objects n13.64.196.27-255.255.255.255 ipaddr 13.64.196.27
+modify network_objects n13.64.196.27-255.255.255.255 netmask 255.255.255.255
+modify network_objects n13.64.196.27-255.255.255.255 comments "Created by ochepist with dbedit"
+update network_objects n13.64.196.27-255.255.255.255
+addelement network_objects g-o365 '' network_objects:n13.64.196.27-255.255.255.255
+update network_objects g-o365
+
+$ cat results/g-o365-dbedit.txt | wc -l
+1411
+
 
 ```
 
