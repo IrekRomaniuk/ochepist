@@ -46,7 +46,11 @@ $./ochepist_lin
 ### Example
 
 ```
+Reads addresses from url and writes in results/g-o365-dbedit.txt. To read from https://support.content.office.net/en-us/static/O365IPAddresses.xml use 'O365IPAddresses.xml' as url
+
 $ ./ochepist_linux_386 -url="https://minemeld/feeds/office365_IPv4s" -g="g-o365"
+
+Imports into Checkpoint management server
 
 $ dbedit -local -ignore_script_failure -globallock -f results/g-o365-dbedit.txt
 
