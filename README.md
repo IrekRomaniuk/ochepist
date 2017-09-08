@@ -59,7 +59,7 @@ $ cat results/g-o365-dbedit.txt | wc -l
 
 ```
 
-### Example
+### Example including dbedit 
 
 ```
 Reads addresses from url and writes in results/g-o365-dbedit.txt. To read from https://support.content.office.net/en-us/static/O365IPAddresses.xml use 'O365IPAddresses.xml' as url
