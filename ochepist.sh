@@ -13,11 +13,12 @@ source $CPDIR_PATH/tmp/.CPprofile.sh
 # Setup the MDS Environment
 #$MDSDIR/scripts/MDSprofile.sh
 
-CMA = "myCMA"
-GROUP = "g-ochepist"
+CMA="myCMA"
+GROUP="g-ochepist"
+DIR="/var/scripts/ochepist"
 mdsenv $CMA
-cd /var/scripts/ochepist/
-/var/scripts/ochepist/bin/ochepist_lin -g="$GROUP"
+cd $DIR
+bin/ochepist_lin -g="$GROUP"
 if [ $? -eq 0 ]; then
     echo "NOT CHANGED" 
 else
