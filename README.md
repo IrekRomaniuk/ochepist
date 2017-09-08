@@ -76,10 +76,10 @@ $ dbedit -local -ignore_script_failure -globallock -f results/g-o365-dbedit.txt
 + add #comments in template files i.e. do not add spaces or empty lines
 
 ### References
-
-1. https://sc1.checkpoint.com/documents/R77/CP_R77_CLI_ReferenceGuide_WebAdmin/html_frameset.htm?topic=documents/R77/CP_R77_CLI_ReferenceGuide_WebAdmin/105997
-2. https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk30383
-3. http://networkgeekstuff.com/networking/introduction-to-checkpoint-firewall-cli-tool-dbedit-and-quick-lab-examples/
+1. Split tunneling based on external dynamic lists for Checkpoint https://medium.com/@IrekRomaniuk/split-tunneling-based-on-external-dynamic-lists-for-checkpoint-2ec20aab6525
+2. https://sc1.checkpoint.com/documents/R77/CP_R77_CLI_ReferenceGuide_WebAdmin/html_frameset.htm?topic=documents/R77/CP_R77_CLI_ReferenceGuide_WebAdmin/105997
+3. https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk30383
+4. http://networkgeekstuff.com/networking/introduction-to-checkpoint-firewall-cli-tool-dbedit-and-quick-lab-examples/
 4. https://medium.com/@IrekRomaniuk/creating-a-source-for-external-dynamic-list-on-paloalto-firewall-578363f307a8
-5. https://www.cpug.org/forums/showthread.php/22008-Split-Tunneling-based-on-Application-Control?p=96108#post96108
-6. https://www.cpug.org/forums/showthread.php/21002-How-to-handle-Office365-IP-addresses
+6. https://www.cpug.org/forums/showthread.php/22008-Split-Tunneling-based-on-Application-Control?p=96108#post96108
+7. https://www.cpug.org/forums/showthread.php/21002-How-to-handle-Office365-IP-addresses
