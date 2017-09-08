@@ -6,6 +6,8 @@ import (
 	"log"
 	"bufio"
 	"strings"
+	"net"
+	"fmt"
 )
 
 var tpl *template.Template
@@ -33,8 +35,8 @@ func IP2dbedit(data, group, comment, templates string) bytes.Buffer {
 					}					
 			 	case strings.ContainsAny(line,"/"):
 				 	s:= strings.Split(line,"/")
-					if ValidIP4(s[0]) && ValidIP4(s[1]) {  // s[1] to be checked for mask
-						write2dbedit("networks.gotxt", "n", "-", s[0],s[1])
+					if ValidIP4(s[0]) {  // && ValidIP4(s[1] if s[1] to be checked for mask						
+						write2dbedit("networks.gotxt", "n", "-", s[0], MaskDot(line))
 					}											
 				default: 
 					s := strings.Split(line,"\n")
@@ -69,4 +71,13 @@ func check(e error) {
     if e != nil {
         log.Fatalln(e)
     }
+}
+
+// MaskDot converts netamsk to dot notation
+func MaskDot(ipm string) string {
+	if s:= strings.Split(ipm,"/"); len(s[1]) > 2 {
+		return s[1]
+	}
+	_, m, _ := net.ParseCIDR(ipm)
+	return fmt.Sprintf("%d.%d.%d.%d", m.Mask[0], m.Mask[1], m.Mask[2], m.Mask[3])
 }

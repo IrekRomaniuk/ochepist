@@ -21,8 +21,6 @@ var (
 	//COMMENT added to created objects
 	COMMENT     = flag.String("c", "Created by ochepist with dbedit", "comment added to objects")
 	version   = flag.Bool("v", false, "Prints current version")
-)
-var (
 	// Version : Program version
 	Version   = "No Version Provided" 
 	// BuildTime : Program build time
@@ -32,6 +30,8 @@ var (
 const (
 	// HASH is the name of the file where state is kept
 	HASH = "hash" 
+	// OXML with O365IPAddresses.xml
+	OXML = "https://support.content.office.net/en-us/static/O365IPAddresses.xml"
 )
 
 func init() {
@@ -47,47 +47,58 @@ func init() {
 	}	
 }
 
-
 func main() {
-// exit value
-var hash int
-if _, err := os.Stat(*PATH + HASH); os.IsNotExist(err) {
-	h, err := os.Create(*PATH + HASH)
+
+	var (
+		hash int // exit value
+		err error
+		data string	// data downloaded from web 
+	) 
+	// Crate hash file if not exists to track changes on web
+	if _, err = os.Stat(*PATH + HASH); os.IsNotExist(err) {
+		h, err := os.Create(*PATH + HASH)
+		check(err)
+		defer h.Close()
+	}	
+	// download ip address data either from web directly or extract from xml
+	if *URL == "O365IPAddresses.xml" {
+		data, err = utils.ReadXML(OXML)		
+	} else {
+		data, err = utils.GetPage(*URL)
+	}
 	check(err)
-	defer h.Close()
-}	
 
-// download page from url
-data, err:= utils.GetPage(*URL)
-check(err)
-oldhash, _ := utils.GetHash(*PATH + HASH)
-newhash := fmt.Sprintf("%x", md5.Sum([]byte(data)))
-//fmt.Printf("old: %s new: %s\n", oldhash, newhash)
-if (oldhash != newhash) {
-	if err = utils.SetHash(newhash, *PATH + HASH); err != nil {
-			hash = 2	// //HASH has changed but not written to file
-		} else {
-			hash = 1 //HASH has chaned
-		}
-		// parses data to dbedit format	
-		output := utils.IP2dbedit(data, *GROUP, *COMMENT, *TEMPLATES)
-		f, err := os.Create(*PATH + *GROUP + "-dbedit.txt")
-		check(err)
-		defer f.Close()
-		// writes data in dbedit format to file
-		_, err = f.Write(output.Bytes())
-		check(err)
-	
-} else  {
-	hash = 0 // HASH NOT CHANGED
+	oldhash, _ := utils.GetHash(*PATH + HASH)
+	newhash := fmt.Sprintf("%x", md5.Sum([]byte(data)))
+	//fmt.Printf("old: %s new: %s\n", oldhash, newhash)
+	if (oldhash != newhash) {
+		if err = utils.SetHash(newhash, *PATH + HASH); err != nil {
+				hash = 2	// //HASH has changed but not written to file
+			} else {
+				hash = 1 //HASH has chaned
+			}
+			// parses data to dbedit format	
+			output := utils.IP2dbedit(data, *GROUP, *COMMENT, *TEMPLATES)
+			f, err := os.Create(*PATH + *GROUP + "-dbedit.txt")
+			check(err)
+			defer f.Close()
+			// writes data in dbedit format to file
+			_, err = f.Write(output.Bytes())
+			check(err)
+		
+	} else  {
+		hash = 0 // HASH NOT CHANGED
+	}
+	os.Exit(hash)
 }
-os.Exit(hash)
-}
-
-
 
 func check(e error) {
     if e != nil {
         log.Fatalln(e)
     }
+}
+
+func hand(path string) (*os.File, error) {
+	h, err := os.Create(path)
+	return h, err
 }

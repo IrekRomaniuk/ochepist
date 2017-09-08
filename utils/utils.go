@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"regexp"
 	"strings"
-	"fmt"
 	"encoding/xml"
 )
 // Azure includes all Products
@@ -28,17 +27,20 @@ type List struct {
 	//Address
 }
 
-/*type Address struct {
-	address string
-}*/
-
 // ReadXML unmarshals xml
-func ReadXML(htmlData string) ([]Product, error) {
-    var products Azure
+func ReadXML(url string) (string, error) {
+	var products Azure
+	
+	htmlData, err := GetPage(url)
+	if err != nil {
+		return "", err
+	}
+
     if err := xml.Unmarshal([]byte(htmlData), &products); err != nil {
-        return nil, err
-    }
-    return products.Products, nil
+        return "", err
+	}
+	
+    return strings.Join(products.Products[0].List[1].Address,"\n"), nil
 }
 
 // GetPage from url and return body as string
@@ -68,14 +70,7 @@ func ValidIP4(ip string) bool {
 	}
 	return false
 }
-// MaskDot converts netamsk to dot notation
-func MaskDot(m []byte) string {
-	if len(m) != 4 {
-		panic("ipv4Mask: len must be 4 bytes")
-	}
 
-	return fmt.Sprintf("%d.%d.%d.%d", m[0], m[1], m[2], m[3])
-}
 // GetHash reads hash from file
 func GetHash(file string) (string, error) {
 	b, err := ioutil.ReadFile(file) 

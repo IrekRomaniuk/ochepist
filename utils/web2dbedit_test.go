@@ -17,6 +17,11 @@ func TestIP2dbedit(t *testing.T) {
 	fmt.Printf("wrote %d bytes\n", b)
 }
 
+func TestMaskDot(t *testing.T) {
+	fmt.Println(MaskDot("10.0.0.0/8"))
+	fmt.Println(MaskDot("10.0.0.0/255.255.255.0"))
+}
+
 const data = `
 1.1.1.1-1.1.1.254
 2.2.2.0/255.255.255.0

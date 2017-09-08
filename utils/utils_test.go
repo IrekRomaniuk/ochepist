@@ -4,35 +4,21 @@ import (
 	"testing"
 	"fmt"
 	"crypto/md5"
-	"net"
-    
 )
 
-func TestReadXML(t *testing.T) {
-	data, _ := ReadXML(o365IP)
-	fmt.Println(data[0].List[0].Address)	
-}
-
 func TestGetPage(t *testing.T) {	
-	mm, _ := GetPage("https://minemeld/feeds/office365_IPv4s")
-	//fmt.Println(mm)
+	data, _ := GetPage("https://minemeld/feeds/office365_IPv4s")
+	fmt.Println(data)
 	// Hash received data in order to find if web page content has changed
-	fmt.Printf("\nmd5sum is %x\n", md5.Sum([]byte(mm)))
-	xml, _ := GetPage("https://support.content.office.net/en-us/static/O365IPAddresses.xml")
-	ms, _ := ReadXML(xml)
-	fmt.Println(ms[0].List[1])
+	fmt.Printf("\nmd5sum is %x\n", md5.Sum([]byte(data)))
+	data, _ = ReadXML("https://support.content.office.net/en-us/static/O365IPAddresses.xml")
+	fmt.Println(data)
 }
 
 func TestGetHash(t *testing.T) {
 	hash, _ := GetHash("../results/hash")
 	fmt.Println(hash)
 }
-
-func TestMaskDot(t *testing.T) {
-	_, ipv4Net, _ := net.ParseCIDR("10.0.0.0/8")
-	fmt.Println(MaskDot(ipv4Net.Mask))
-}
-
 
 const o365IP = `<products updated="9/1/2017">
 <product name="o365">
