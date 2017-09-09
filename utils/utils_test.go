@@ -8,7 +8,7 @@ import (
 )
 
 func TestGetPage(t *testing.T) {
-	const layout = "Jan 2"
+	const layout = "Jan-2"
 	suf := time.Now()
     res := suf.Format(layout)	
 	data1, _ := GetPage("https://minemeld/feeds/office365_IPv4s")
