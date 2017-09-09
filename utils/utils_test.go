@@ -4,15 +4,19 @@ import (
 	"testing"
 	"fmt"
 	"io/ioutil"
+	"time"
 )
 
-func TestGetPage(t *testing.T) {	
+func TestGetPage(t *testing.T) {
+	const layout = "Jan 2"
+	suf := time.Now()
+    res := suf.Format(layout)	
 	data1, _ := GetPage("https://minemeld/feeds/office365_IPv4s")
 	//fmt.Println(data1)
-	ioutil.WriteFile("mm.txt", []byte(data1), 0644)
+	ioutil.WriteFile("./data/mm-"+res+".txt", []byte(data1), 0644)
 	data2, _ := ReadXML("https://support.content.office.net/en-us/static/O365IPAddresses.xml")
 	//fmt.Println(data2)
-	ioutil.WriteFile("ms.txt", []byte(data2), 0644)
+	ioutil.WriteFile("./data/ms-"+res+".txt", []byte(data2), 0644)
 }
 
 func TestGetHash(t *testing.T) {
