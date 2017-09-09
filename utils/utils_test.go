@@ -3,13 +3,16 @@ package utils
 import (
 	"testing"
 	"fmt"
+	"io/ioutil"
 )
 
 func TestGetPage(t *testing.T) {	
 	data1, _ := GetPage("https://minemeld/feeds/office365_IPv4s")
-	fmt.Println(data1)
+	//fmt.Println(data1)
+	ioutil.WriteFile("mm.txt", []byte(data1), 0644)
 	data2, _ := ReadXML("https://support.content.office.net/en-us/static/O365IPAddresses.xml")
-	fmt.Println(data2)
+	//fmt.Println(data2)
+	ioutil.WriteFile("ms.txt", []byte(data2), 0644)
 }
 
 func TestGetHash(t *testing.T) {
