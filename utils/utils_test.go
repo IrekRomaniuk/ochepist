@@ -3,22 +3,21 @@ package utils
 import (
 	"testing"
 	"fmt"
-	"crypto/md5"
 )
 
 func TestGetPage(t *testing.T) {	
-	data, _ := GetPage("https://minemeld/feeds/office365_IPv4s")
-	fmt.Println(data)
-	// Hash received data in order to find if web page content has changed
-	fmt.Printf("\nmd5sum is %x\n", md5.Sum([]byte(data)))
-	data, _ = ReadXML("https://support.content.office.net/en-us/static/O365IPAddresses.xml")
-	fmt.Println(data)
+	data1, _ := GetPage("https://minemeld/feeds/office365_IPv4s")
+	fmt.Println(data1)
+	data2, _ := ReadXML("https://support.content.office.net/en-us/static/O365IPAddresses.xml")
+	fmt.Println(data2)
 }
 
 func TestGetHash(t *testing.T) {
 	hash, _ := GetHash("../results/hash")
 	fmt.Println(hash)
 }
+
+
 
 const o365IP = `<products updated="9/1/2017">
 <product name="o365">
