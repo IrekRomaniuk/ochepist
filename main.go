@@ -94,7 +94,8 @@ func main() {
 
 func check(e error) {
     if e != nil {
-        log.Fatalln(e)
+		log.Fatalln(e)
+		//os.Exit(3)
     }
 }
 
