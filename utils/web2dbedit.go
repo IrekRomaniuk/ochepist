@@ -25,6 +25,7 @@ func IP2dbedit(data, group, comment, templates string) bytes.Buffer {
 		"netmask": "", "group": group, "comment": comment} 
 	result.WriteString("delete network_objects " + group + "\n")
 	result.WriteString("create network_object_group " + group + "\n")
+	result.WriteString("addelement network_objects " + group + "-wrapper '' network_objects:" + group + "\n")
 	for scanner.Scan() {
 				line:=strings.Trim(scanner.Text(),"")				
 			  	switch  {
